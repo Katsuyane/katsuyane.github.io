@@ -1,38 +1,38 @@
 body {
   font-family: Arial, sans-serif;
   text-align: center;
-  background-color: #f5f5f5;
 }
 
 .logo {
-  margin-top: 20px;
   width: 150px;
+  margin: 20px 0;
 }
 
 input {
-  width: 80%;
+  width: 70%;
   padding: 10px;
-  margin: 10px 0;
+  margin-bottom: 10px;
 }
 
 button {
   padding: 10px 20px;
-  background-color: #007bff;
+  background-color: #007BFF;
   color: white;
   border: none;
   cursor: pointer;
 }
 
-button:hover {
-  background-color: #0056b3;
+.banner {
+  margin: 20px 0;
+  padding: 10px;
+  background-color: yellow;
 }
 
-ul {
-  list-style: none;
-  padding: 0;
-}
-
-ul li a {
+#downloadBtn {
+  display: none;
   text-decoration: none;
-  color: #007bff;
+  padding: 10px 20px;
+  background-color: green;
+  color: white;
+  border-radius: 5px;
 }
