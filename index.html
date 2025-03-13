@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Download Asupanku</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <img src="https://raw.githubusercontent.com/AangQwerty/AangQwerty/refs/heads/main/Img/Favicon/IMG_20250208_151104_-removebg-preview.png" alt="Logo Asupanku">
+
+  <input type="file" id="fileInput">
+  <button onclick="uploadFile()">Upload File</button>
+
+  <div class="link-list" id="linkList"></div>
+
+  <script>
+    async function uploadFile() {
+      const fileInput = document.getElementById('fileInput');
+      const file = fileInput.files[0];
+
+      if (!file) return alert('Pilih file terlebih dahulu!');
+
+      const fileURL = URL.createObjectURL(file);
+
+      const response = await fetch('links.json');
+      let links = await response.json();
+
+      links.push(fileURL);
+
+      await fetch('links.json', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(links)
+      });
+
+      displayLinks();
+      fileInput.value = '';
+    }
+
+    async function displayLinks() {
+      const response = await fetch('links.json');
+      const links = await response.json();
+
+      const linkList = document.getElementById('linkList');
+      linkList.innerHTML = links.map(link => `<div class="link-item"><a href="${link}" target="_blank">${link}</a></div>`).join('');
+    }
+
+    window.onload = displayLinks;
+  </script>
+</body>
+
+</html>
