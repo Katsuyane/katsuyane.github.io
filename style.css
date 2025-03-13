@@ -3,36 +3,20 @@ body {
   text-align: center;
 }
 
-.logo {
-  width: 150px;
-  margin: 20px 0;
-}
-
-input {
-  width: 70%;
-  padding: 10px;
-  margin-bottom: 10px;
-}
-
-button {
-  padding: 10px 20px;
-  background-color: #007BFF;
-  color: white;
-  border: none;
-  cursor: pointer;
-}
-
-.banner {
-  margin: 20px 0;
-  padding: 10px;
+.banner-iklan {
   background-color: yellow;
+  padding: 10px;
+  margin: 10px 0;
 }
 
 #downloadBtn {
-  display: none;
-  text-decoration: none;
   padding: 10px 20px;
-  background-color: green;
+  background-color: #4caf50;
   color: white;
+  text-decoration: none;
   border-radius: 5px;
+}
+
+#countdown {
+  font-weight: bold;
 }
