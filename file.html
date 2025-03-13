@@ -1,25 +1,44 @@
-const urlParams = new URLSearchParams(window.location.search);
-const fileID = urlParams.get('file');
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Download File</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Download File</h1>
+  <div class="banner-iklan">🎯 Iklan Banner 🎯</div>
+  <p>Link akan muncul dalam <span id="countdown">5</span> detik...</p>
 
-// Ambil data link dari localStorage
-const links = JSON.parse(localStorage.getItem('links')) || {};
-const originalLink = links[fileID];
+  <a id="downloadBtn" style="display: none;" target="_blank">Download File</a>
 
-if (!originalLink) {
-  alert('Link tidak valid');
-  window.location.href = '/';
-} else {
-  let count = 5;
-  const countdownElement = document.getElementById('countdown');
-  const downloadBtn = document.getElementById('downloadBtn');
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const fileID = urlParams.get('file');
 
-  const timer = setInterval(() => {
-    count--;
-    countdownElement.innerText = count;
-    if (count === 0) {
-      clearInterval(timer);
-      downloadBtn.style.display = 'block';
-      downloadBtn.href = originalLink;
+    // Ambil data dari localStorage
+    const links = JSON.parse(localStorage.getItem('links')) || {};
+    const originalLink = links[fileID];
+
+    if (!originalLink) {
+      alert('Link tidak valid');
+      window.location.href = '/';
+    } else {
+      let count = 5;
+      const countdownElement = document.getElementById('countdown');
+      const downloadBtn = document.getElementById('downloadBtn');
+
+      const timer = setInterval(() => {
+        count--;
+        countdownElement.innerText = count;
+        if (count === 0) {
+          clearInterval(timer);
+          downloadBtn.style.display = 'block';
+          downloadBtn.href = originalLink;
+        }
+      }, 1000);
     }
-  }, 1000);
-}
+  </script>
+</body>
+</html>
