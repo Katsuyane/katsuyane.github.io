@@ -4,19 +4,18 @@ body {
   margin: 20px;
 }
 
-img {
-  width: 150px;
+.logo {
+  max-width: 200px;
   margin-bottom: 20px;
 }
 
 input[type="file"] {
-  margin-bottom: 20px;
-}
-
-.link-list {
-  margin-top: 20px;
-}
-
-.link-item {
   margin-bottom: 10px;
+}
+
+#downloadLinks a {
+  display: block;
+  margin: 10px 0;
+  text-decoration: none;
+  color: blue;
 }
