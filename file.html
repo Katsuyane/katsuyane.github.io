@@ -1,47 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
+const urlParams = new URLSearchParams(window.location.search);
+const fileID = urlParams.get('file');
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-  <title>Download File</title>
-  <link rel="stylesheet" href="style.css">
-</head>
+// Ambil data link dari localStorage
+const links = JSON.parse(localStorage.getItem('links')) || {};
+const originalLink = links[fileID];
 
-<body>
-  <h1>Download File</h1>
-  <div class="banner">🎯 Iklan Banner 🎯</div>
-  <p>Link akan muncul dalam <span id="countdown">5</span> detik...</p>
-  <a id="downloadBtn" href="#" style="display: none;">Download File</a>
+if (!originalLink) {
+  alert('Link tidak valid');
+  window.location.href = '/';
+} else {
+  let count = 5;
+  const countdownElement = document.getElementById('countdown');
+  const downloadBtn = document.getElementById('downloadBtn');
 
-  <script>
-    const urlParams = new URLSearchParams(window.location.search);
-    const fileID = urlParams.get('file');
-
-    fetch('links.json')
-      .then(response => response.json())
-      .then(data => {
-        const originalLink = data[fileID];
-        if (!originalLink) {
-          alert('Link tidak valid');
-          window.location.href = '/';
-        } else {
-          let count = 5;
-          const countdownElement = document.getElementById('countdown');
-          const downloadBtn = document.getElementById('downloadBtn');
-
-          const timer = setInterval(() => {
-            count--;
-            countdownElement.innerText = count;
-            if (count === 0) {
-              clearInterval(timer);
-              downloadBtn.style.display = 'block';
-              downloadBtn.href = originalLink;
-            }
-          }, 1000);
-        }
-      });
-  </script>
-</body>
-
-</html>
+  const timer = setInterval(() => {
+    count--;
+    countdownElement.innerText = count;
+    if (count === 0) {
+      clearInterval(timer);
+      downloadBtn.style.display = 'block';
+      downloadBtn.href = originalLink;
+    }
+  }, 1000);
+}
