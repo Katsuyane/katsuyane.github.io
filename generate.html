@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Generate Link</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #121212;
+      color: #ffffff;
+      text-align: center;
+      padding: 20px;
+    }
+
+    h2 {
+      color: #00ffcc;
+    }
+
+    input[type="text"] {
+      width: 80%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #00ffcc;
+      background-color: #1e1e1e;
+      color: white;
+      border-radius: 5px;
+    }
+
+    button {
+      background-color: #00ffcc;
+      color: black;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    button:hover {
+      background-color: #009688;
+    }
+
+    #outputLink {
+      margin-top: 20px;
+      font-size: 16px;
+      color: #00ffcc;
+    }
+
+    a {
+      color: #00ffcc;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+
+<body>
+  <h2>Generate Link Download</h2>
+  <input type="text" id="linkInput" placeholder="Masukkan link mediafire/dll ...">
+  <br>
+  <button onclick="generateLink()">Generate</button>
+  <br>
+  <p id="outputLink"></p>
+
+  <script>
+    function generateLink() {
+      const inputLink = document.getElementById('linkInput').value;
+      const encodedLink = encodeURIComponent(inputLink);
+      const outputLink = `https://katsuyane.github.io/?file=${encodedLink}`;
+      document.getElementById('outputLink').innerHTML = `<a href="${outputLink}" target="_blank">${outputLink}</a>`;
+    }
+  </script>
+</body>
+
+</html>
