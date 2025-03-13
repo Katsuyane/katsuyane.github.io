@@ -1,61 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Download Asupanku</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Dood Zero Downloader</title>
   <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-  <img src="https://raw.githubusercontent.com/AangQwerty/AangQwerty/refs/heads/main/Img/Favicon/IMG_20250208_151104_-removebg-preview.png" alt="Logo" class="logo">
-  <input type="file" id="fileInput">
-  <button onclick="uploadFile()">Upload File</button>
-  <ul id="downloadLinks"></ul>
+  <img src="https://i.ibb.co/4fDnN8k/logo-doodzero.png" alt="Dood Zero Logo" class="logo">
+  
+  <input type="text" id="fileUrl" placeholder="Masukkan link download di sini...">
+  <button onclick="generateLink()">Generate Link</button>
+  
+  <h3>Link Download yang Tersedia:</h3>
+  <ul id="downloadList"></ul>
 
-  <script>
-    const linksFile = 'links.json';
-
-    async function fetchLinks() {
-      const response = await fetch(linksFile);
-      return response.json();
-    }
-
-    async function uploadFile() {
-      const fileInput = document.getElementById('fileInput');
-      const file = fileInput.files[0];
-      if (!file) return alert('Pilih file dulu!');
-
-      const linkData = await fetchLinks();
-      const newLink = {
-        name: file.name,
-        url: `https://luluvdo.com/d/${Math.random().toString(36).substr(2, 9)}`
-      };
-
-      linkData.push(newLink);
-
-      const blob = new Blob([JSON.stringify(linkData, null, 2)], { type: 'application/json' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = 'links.json';
-      a.click();
-    }
-
-    function loadDownloadLink() {
-      const params = new URLSearchParams(window.location.search);
-      const fileCode = params.get('file');
-      if (fileCode) {
-        const downloadLinks = document.getElementById('downloadLinks');
-        const li = document.createElement('li');
-        li.innerHTML = `<a href="https://luluvdo.com/d/${fileCode}" target="_blank">Download File</a>`;
-        downloadLinks.appendChild(li);
-      }
-    }
-
-    window.onload = loadDownloadLink;
-  </script>
+  <script src="script.js"></script>
 </body>
-
 </html>
