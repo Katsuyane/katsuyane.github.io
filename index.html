@@ -9,46 +9,52 @@
 </head>
 
 <body>
-  <img src="https://raw.githubusercontent.com/AangQwerty/AangQwerty/refs/heads/main/Img/Favicon/IMG_20250208_151104_-removebg-preview.png" alt="Logo Asupanku">
-
+  <img src="https://raw.githubusercontent.com/AangQwerty/AangQwerty/refs/heads/main/Img/Favicon/IMG_20250208_151104_-removebg-preview.png" alt="Logo" class="logo">
   <input type="file" id="fileInput">
   <button onclick="uploadFile()">Upload File</button>
-
-  <div class="link-list" id="linkList"></div>
+  <ul id="downloadLinks"></ul>
 
   <script>
+    const linksFile = 'links.json';
+
+    async function fetchLinks() {
+      const response = await fetch(linksFile);
+      return response.json();
+    }
+
     async function uploadFile() {
       const fileInput = document.getElementById('fileInput');
       const file = fileInput.files[0];
+      if (!file) return alert('Pilih file dulu!');
 
-      if (!file) return alert('Pilih file terlebih dahulu!');
+      const linkData = await fetchLinks();
+      const newLink = {
+        name: file.name,
+        url: `https://luluvdo.com/d/${Math.random().toString(36).substr(2, 9)}`
+      };
 
-      const fileURL = URL.createObjectURL(file);
+      linkData.push(newLink);
 
-      const response = await fetch('links.json');
-      let links = await response.json();
-
-      links.push(fileURL);
-
-      await fetch('links.json', {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(links)
-      });
-
-      displayLinks();
-      fileInput.value = '';
+      const blob = new Blob([JSON.stringify(linkData, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'links.json';
+      a.click();
     }
 
-    async function displayLinks() {
-      const response = await fetch('links.json');
-      const links = await response.json();
-
-      const linkList = document.getElementById('linkList');
-      linkList.innerHTML = links.map(link => `<div class="link-item"><a href="${link}" target="_blank">${link}</a></div>`).join('');
+    function loadDownloadLink() {
+      const params = new URLSearchParams(window.location.search);
+      const fileCode = params.get('file');
+      if (fileCode) {
+        const downloadLinks = document.getElementById('downloadLinks');
+        const li = document.createElement('li');
+        li.innerHTML = `<a href="https://luluvdo.com/d/${fileCode}" target="_blank">Download File</a>`;
+        downloadLinks.appendChild(li);
+      }
     }
 
-    window.onload = displayLinks;
+    window.onload = loadDownloadLink;
   </script>
 </body>
 
