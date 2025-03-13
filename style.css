@@ -1,0 +1,22 @@
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  margin: 20px;
+}
+
+img {
+  width: 150px;
+  margin-bottom: 20px;
+}
+
+input[type="file"] {
+  margin-bottom: 20px;
+}
+
+.link-list {
+  margin-top: 20px;
+}
+
+.link-item {
+  margin-bottom: 10px;
+}
