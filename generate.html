@@ -69,8 +69,8 @@
   <script>
     function generateLink() {
       const inputLink = document.getElementById('linkInput').value;
-      const encodedLink = encodeURIComponent(inputLink);
-      const outputLink = `https://asupanku.xyz/?file=${encodedLink}`;
+      const uniqueCode = btoa(inputLink); // Encode base64 biar konsisten
+      const outputLink = `https://asupanku.xyz/?file=${uniqueCode}`;
       document.getElementById('outputLink').innerHTML = `<a href="${outputLink}" target="_blank">${outputLink}</a>`;
     }
   </script>
