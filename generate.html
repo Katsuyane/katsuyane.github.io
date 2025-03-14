@@ -12,6 +12,10 @@
       color: #ffffff;
       text-align: center;
       padding: 20px;
+      user-select: none; /* Anti copy */
+      -webkit-user-select: none;
+      -ms-user-select: none;
+      zoom: 1; /* Anti zoom */
     }
 
     h2 {
@@ -60,27 +64,17 @@
 
 <body>
   <h2>Generate Link Download</h2>
-  <input type="text" id="linkInput" placeholder="Masukkan link mediafire/dll ...">
+  <input type="text" id="linkInput" placeholder="Masukkan link Mediafire, LuluVDO, GDrive...">
   <br>
   <button onclick="generateLink()">Generate</button>
   <br>
   <p id="outputLink"></p>
 
   <script>
-    // Ambil parameter dari URL
-    const urlParams = new URLSearchParams(window.location.search);
-    const fileUrl = urlParams.get('file');
-
-    // Redirect ke file tujuan jika parameter file ada
-    if (fileUrl) {
-      const decodedUrl = atob(fileUrl); // Decode base64
-      window.location.href = decodedUrl;
-    }
-
     function generateLink() {
       const inputLink = document.getElementById('linkInput').value;
-      const uniqueCode = btoa(inputLink); // Encode base64 biar konsisten
-      const outputLink = `https://asupanku.xyz/generate.html?file=${uniqueCode}`;
+      const encodedLink = btoa(inputLink); // Encode Base64 biar konsisten
+      const outputLink = `https://asupanku.xyz/?file=${encodedLink}`;
       document.getElementById('outputLink').innerHTML = `<a href="${outputLink}" target="_blank">${outputLink}</a>`;
     }
   </script>
