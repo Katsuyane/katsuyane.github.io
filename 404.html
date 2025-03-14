@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Redirecting...</title>
+  <script>
+    const path = window.location.pathname.substring(1); // Ambil kode di URL
+    if (path) {
+      const decodedUrl = atob(path); // Decode base64
+      window.location.href = decodedUrl; // Redirect ke link asli
+    } else {
+      document.body.innerHTML = '<h1>404 Not Found</h1>';
+    }
+  </script>
+</head>
+
+<body>
+</body>
+
+</html>
